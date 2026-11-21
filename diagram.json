@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "author": "PlantaComSistemasEmbarcados",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 280, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-lcd2004",
+      "id": "lcd",
+      "top": 0,
+      "left": 78,
+      "attrs": { "pins": "full", "background": "#c4d948", "color": "#253319" }
+    },
+    {
+      "type": "wokwi-pushbutton-6mm",
+      "id": "manual",
+      "top": 126,
+      "left": -155,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "boia",
+      "top": 193,
+      "left": -155,
+      "attrs": { "value": "1", "bounce": "0" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "umidade",
+      "top": 469.1,
+      "left": 422.2,
+      "attrs": { "value": "512" }
+    },
+    { "type": "wokwi-led", "id": "alerta", "top": 282, "left": -155, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-resistor",
+      "id": "rAlerta",
+      "top": 320,
+      "left": -110,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-relay-module",
+      "id": "rele",
+      "top": 211.4,
+      "left": 345.6,
+      "attrs": { "transistor": "npn" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rBomba",
+      "top": 243.95,
+      "left": 499.2,
+      "attrs": { "value": "330" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "bomba",
+      "top": 306.4,
+      "left": 529.4,
+      "rotate": 270,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelManual",
+      "top": 124.8,
+      "left": -288,
+      "attrs": { "text": "Rega manual" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelBoia",
+      "top": 192,
+      "left": -336,
+      "attrs": { "text": "Nível do reservatório\nOK  ←  →  Baixo" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelAlerta",
+      "top": 297.6,
+      "left": -259.2,
+      "attrs": { "text": "Falta d’água" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelBomba",
+      "top": 201.6,
+      "left": 499.2,
+      "attrs": { "text": "Bomba simulada" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "labelUmidade",
+      "top": 403.2,
+      "left": 374.4,
+      "attrs": { "text": "Umidade do solo (A0)" }
+    }
+  ],
+  "connections": [
+    [ "lcd:RS", "uno:8", "purple", [ "v50", "*", "v-50" ] ],
+    [ "lcd:E", "uno:9", "purple", [ "v62", "*", "v-38" ] ],
+    [ "lcd:D4", "uno:4", "blue", [ "v50", "*", "v-50" ] ],
+    [ "lcd:D5", "uno:5", "blue", [ "v62", "*", "v-38" ] ],
+    [ "lcd:D6", "uno:6", "blue", [ "v74", "*", "v-26" ] ],
+    [ "lcd:D7", "uno:7", "blue", [ "v86", "*", "v-14" ] ],
+    [ "lcd:VSS", "uno:GND.1", "black", [ "v40", "*", "v-40" ] ],
+    [ "lcd:RW", "lcd:VSS", "black", [ "v30", "h-38.5" ] ],
+    [ "lcd:K", "lcd:VSS", "black", [ "v20", "h-144" ] ],
+    [ "lcd:A", "lcd:VDD", "red", [ "v10", "h-125" ] ],
+    [ "lcd:VDD", "uno:5V", "red", [ "v40", "h-152", "v293", "*", "v36" ] ],
+    [ "manual:2.l", "uno:10", "green", [ "h-12", "v96", "*", "v-36" ] ],
+    [ "manual:1.r", "boia:1", "black", [ "h14", "v26", "*", "v14" ] ],
+    [ "boia:2", "uno:11", "orange", [ "v28", "*", "v-26" ] ],
+    [ "boia:1", "uno:GND.1", "black", [ "v38", "*", "v-16" ] ],
+    [ "uno:12", "rAlerta:2", "gold", [ "v-8", "h-157", "*", "h16" ] ],
+    [ "rAlerta:1", "alerta:A", "gold", [ "h-10" ] ],
+    [ "alerta:C", "uno:GND.2", "black", [ "v179", "*", "v41" ] ],
+    [ "uno:3", "rele:IN", "green", [ "v-39.4", "h99.6", "v0.2" ] ],
+    [ "uno:5V", "rele:VCC", "red", [ "v66.1", "h175.6", "v-307.2" ] ],
+    [ "uno:GND.3", "rele:GND", "black", [ "v12", "h128.2", "v-243.1" ] ],
+    [ "rele:VCC", "rele:COM", "red", [ "h-22", "v-38.4", "h166", "v49.4" ] ],
+    [ "rele:NO", "rBomba:1", "green", [ "h8" ] ],
+    [ "rBomba:2", "bomba:A", "green", [ "h10" ] ],
+    [ "bomba:C", "rele:GND", "black", [ "v38", "h-259.2", "v-53.4", "v-45" ] ],
+    [ "uno:A0", "umidade:SIG", "cyan", [ "v94.9", "h79", "h174.2" ] ],
+    [ "uno:GND.3", "umidade:GND", "black", [ "v85.3", "h272.2" ] ],
+    [ "uno:5V", "umidade:VCC", "red", [ "v104.5", "h311.2" ] ]
+  ],
+  "dependencies": {}
+}
